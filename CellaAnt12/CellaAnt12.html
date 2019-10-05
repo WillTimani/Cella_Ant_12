@@ -1,0 +1,159 @@
+<!doctype html><html><head>
+<title>Journey of Cella Ant 12</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body><h1>Cella Ant 12</h1>
+<h4>Created By: William Timani</h4>
+
+<canvas id="grid" width="410" height="410"></canvas>
+
+<br>
+Enter speed (lower is faster):
+<input type="text" size="5" id="Speed">
+<br>
+
+<input type="button" value="Submit" onclick="change_speed()">
+
+</body>
+<script src="draw-stuff.js"></script>
+<script>
+
+var speed = 100; // ant's speed (how often it moves in milliseconds)
+
+//Change Speed function 
+//changes the speed of the ant when a new speed is submitted 
+function change_speed()
+{
+	window.speed = document.getElementById("Speed").value;
+	
+}
+
+//functions used for checking the color of the 10x10 square the ant is currently at 
+function isBlack(dataPixel) {
+  if(dataPixel[0] == dataPixel[1] && dataPixel[1] == dataPixel[2] && dataPixel[2] == 0) return true;
+}
+
+function isRed(dataPixel){
+  if(dataPixel[0] == 255 && dataPixel[1] == 0 && dataPixel[2] == 0) return true;
+}
+
+function isYellow(dataPixel){
+  if(dataPixel[0] == 255 && dataPixel[1] == 255 && dataPixel[2] == 0) return true;
+}
+
+function isBlue(dataPixel){
+  if(dataPixel[0] == 0 && dataPixel[1] == 0 && dataPixel[2] == 255) return true;
+}
+
+// turn() function
+// takes in direction to turn (0(right) or 1(left)) current heading and context of the canvas to translate the ant in the new direction
+// returns the new heading based on the its current heading and the direction it turned 
+function turn(dir, head, context){
+
+  	if(dir == 0){
+   		if(head == 0){
+      		context.translate(10, 0);
+      		return 1;
+    	} else if (head == 1){
+      		context.translate(0, 10);
+      		return 2;
+	    } else if (head == 2){
+    	  	context.translate(-10, 0);
+     		return 3;
+	    } else if (head == 3){
+    		context.translate(0, -10);
+      		return 0;
+    	}
+ 	} else {
+   		if(head == 0){
+     		context.translate(-10, 0);
+      		return 3;
+    	} else if (head == 1){
+      		context.translate(0, -10);
+      		return 0;
+ 	   } else if (head == 2){
+     		context.translate(10, 0);
+     		return 1;
+ 	   } else if (head == 3){
+    	 	context.translate(0, 10);
+    		return 2;
+    	}
+  	}
+
+}
+
+
+// =====================================================  Main ====
+
+  var canvas = document.getElementById( "grid" );
+  var context = canvas.getContext( "2d" );
+  
+  //fill background of grid with black to initialie the program
+  context.fillStyle == "black";
+  context.fillRect(410,410,0,0);
+
+  //create the ant in the middle of the grid as a 10x10 square
+  context.lineWidth = "6";
+  context.fillStyle = "black";
+  context.fillRect(200,200, 10, 10);
+
+  // Draw a grid
+  draw_grid( context, 10, 50, 'white', 'yellow' );
+
+  var x = 200; // ant's current x position
+  var y = 200; // ant's current y position
+  var heading = 0;	// ant's curernt heading 
+
+  // Loops k moves for the ant
+  // utilizes a delay in order to see the ant's individual moves 
+  function theLoop(k) {
+  	setTimeout(function () {
+  		var imgData = context.getImageData(x + 5, y + 5, 1, 1);
+    	
+    	if (isBlack(imgData.data)) {
+      		context.fillStyle = "red";
+    
+   	   		context.fillRect(200, 200, 10, 10);
+   	   		heading = turn(0 ,heading, context);
+   	 	} else if(isRed(imgData.data)) {
+   	   		context.fillStyle = "yellow";
+  
+    		context.fillRect(200, 200, 10, 10);
+      		heading = turn(0 ,heading, context);
+    	} else if(isYellow(imgData.data)){
+      		context.fillStyle = "blue";
+      
+     		context.fillRect(200, 200, 10, 10);
+      		heading = turn(1 ,heading, context);
+    	} else if (isBlue(imgData.data)){
+      		context.fillStyle = "black";
+     
+    		context.fillRect(200, 200, 10, 10);
+      		heading = turn(1 ,heading, context);
+    	}
+
+    	// check heading and change x and y variables based on which direction it moved
+    	//0 = North 1 = East 2 = South 3 = West
+   		if(heading == 0){
+      		y -= 10;
+    	} else if (heading == 1){
+      		x += 10;
+    	} else if (heading == 2){
+      		y += 10;
+    	} else if (heading == 3){
+     		x -= 10;
+    	}
+
+    	if(--k > 0){
+    		theLoop(k);
+    	}
+
+  	}, speed)
+  }
+
+  // being loop with 10000 moves 
+  theLoop(10000);
+  
+
+</script>
+</html>
