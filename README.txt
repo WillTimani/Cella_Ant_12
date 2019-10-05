@@ -1,6 +1,6 @@
-CPSC 335-05
-Project #1 Cella Ant 12 
-Team WIL
+In order to run this application, download the entire folder "CellaAnt12" and open the CellaAnt12.html file located in the folder in any web browser. 
+
+Cella Ant 12 
 William Timani
 
 Intro:
