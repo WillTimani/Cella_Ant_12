@@ -39,4 +39,6 @@ Bugs:
 Third Party Material:
 draw-stuff.js, styles.css and small parts of CellaAnt12.html were provided by Charles Siska
 
-![CellaAntPic](https://github.com/WillTimani/Cella_Ant_12/blob/master/Images/CellaAntPic1.png)
+![CellaAntPic1](https://github.com/WillTimani/Cella_Ant_12/blob/master/Images/CellaAntPic1.png)
+![CellaAntPic2](https://github.com/WillTimani/Cella_Ant_12/blob/master/Images/CellaAntPic2.png)
+![CellaAntPic3](https://github.com/WillTimani/Cella_Ant_12/blob/master/Images/CellaAntPic3.png)
