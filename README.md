@@ -8,12 +8,12 @@ This is a javascript program, with html incorporation for display, that visualiz
 
 The algorithm consists of a loop that runs through each move of the ant. By default it loops 10000 times. In the loop, the algorithm first checks for the color of the 10x10 square under the ant using the image data of the ant's current x and y position. It runs through a series of if statements checking if the image data is one of the colors in the cycle(black,red,yellow,blue) using the color codes of the image. Once it has found the color of the square is changes the color of it to the next color in the sequence. Next, the ant turns right(if black or red) or left(if yellow or blue) using a turn() function. The turn function takes in the direction to turn(0 is right, 1 is left), current heading of the ant(n,s,e,w) and the context variable of the canvas. Inside the turn function, the direction that the ant is turning is first checked. Based on if it is turning left or right and taking in to account the current heading of the ant, it will translate in the proper x or y direction 10 units. A new heading is returned to the caller based on the turn and that heading is stored as the new current heading. The last action performed in the loop is the adjust the ant's current x and y position based on the new heading. 
 
-Contents:
-CellaAnt12.html
-draw-stuff.js
-styles.css
-README.txt
-ComplexityTimeReport.pdf
+Contents:  
+CellaAnt12.html  
+draw-stuff.js  
+styles.css  
+README.txt 
+ComplexityTimeReport.pdf  
 
 External Requirements:
 Google Chrome was used to test this program, however it should work in most modern web browsers.
